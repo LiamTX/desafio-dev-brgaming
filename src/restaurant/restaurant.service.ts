@@ -30,7 +30,7 @@ export class RestaurantService {
 
   async update(id: string, data: UpdateRestaurantDto): Promise<UpdateResult> {
     const restaurantExists = await this.restaurantRepository.findOne({ where: { id } });
-    if (restaurantExists) {
+    if (!restaurantExists) {
       throw new HttpException('restaurant_not_exists', HttpStatus.NOT_FOUND);
     }
 
@@ -38,6 +38,11 @@ export class RestaurantService {
   }
 
   async remove(id: string): Promise<DeleteResult> {
+    const restaurantExists = await this.restaurantRepository.findOne({ where: { id } });
+    if (!restaurantExists) {
+      throw new HttpException('restaurant_not_exists', HttpStatus.NOT_FOUND);
+    }
+
     return await this.restaurantRepository.delete(id);
   }
 }
