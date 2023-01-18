@@ -7,6 +7,7 @@ import { Restaurant } from './entities/restaurant.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateRestaurantHoursDto } from './dto/update-restaurant-hours.dto';
 import { RestaurantHours } from './entities/restaurant-hours.entity';
+import { VerifyIfRestaurantIsOpenDto } from './dto/verify-restaurant-isOpen.dto';
 
 @ApiTags('Restaurant')
 @Controller('restaurant')
@@ -63,13 +64,17 @@ export class RestaurantController {
   @ApiOperation({ description: 'Update one restaurant hours by id' })
   @ApiBody({ type: UpdateRestaurantHoursDto })
   @ApiNotFoundResponse({ description: 'Restaurant not found with this id' })
+  @ApiBadRequestResponse({ description: 'Wrong time format' })
   @Put('hours/:id')
   async updateRestaurantHoursByRestaurantId(@Param('id') id: string, @Body() data: UpdateRestaurantHoursDto) {
     return await this.restaurantService.updateRestaurantHoursByRestaurantId(id, data);
   }
 
+  @ApiOperation({ description: 'Verify if restaurant is open by id and date time' })
+  @ApiBody({ type: VerifyIfRestaurantIsOpenDto })
+  @ApiNotFoundResponse({ description: 'Restaurant not found with this id' })
   @Post('isOpen/:id')
-  async restaurantIsOpen(@Param('id') id: string) {
-    return await this.restaurantService.restaurantIsOpen();
+  async verifyIfRestaurantIsOpen(@Param('id') id: string, @Body() data: VerifyIfRestaurantIsOpenDto): Promise<boolean> {
+    return await this.restaurantService.verifyIfRestaurantIsOpen(id, data);
   }
 }
