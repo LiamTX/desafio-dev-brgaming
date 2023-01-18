@@ -1,10 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { RestaurantHours } from "./restaurant-hours.entity";
 
 @Entity()
 export class Restaurant {
     @ApiProperty()
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn('increment')
     id: string;
 
     @ApiProperty()
@@ -18,6 +19,11 @@ export class Restaurant {
     @ApiProperty()
     @Column()
     type: string;
+
+    @ApiProperty({ type: () => RestaurantHours, nullable: true })
+    @OneToOne(() => RestaurantHours, restaurantHours => restaurantHours.restaurant)
+    @JoinColumn()
+    restaurantHours?: RestaurantHours;
 
     @ApiProperty()
     @CreateDateColumn()

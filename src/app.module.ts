@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RestaurantHours } from './restaurant/entities/restaurant-hours.entity';
 import { Restaurant } from './restaurant/entities/restaurant.entity';
 import { RestaurantModule } from './restaurant/restaurant.module';
 
@@ -14,7 +15,7 @@ require('dotenv').config();
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_DATABASE,
-      entities: [Restaurant],
+      entities: [Restaurant, RestaurantHours],
       synchronize: true,
       options: { encrypt: false }
     }),
