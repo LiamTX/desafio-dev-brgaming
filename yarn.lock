@@ -803,7 +803,7 @@
   resolved "https://registry.yarnpkg.com/@js-joda/core/-/core-5.5.2.tgz#3d7953004d70adf6a0a4140a78c948de758284e0"
   integrity sha512-retLUN4TwCJ0QJDi9OCJwYVaXAz93NeOkEtEQL98M2bykBOxmURlP0YlfsuE46kItOOVZIWRYC3KsSLhQ1R2Qw==
 
-"@nestjs/cli@9.1.8":
+"@nestjs/cli@^9.0.0":
   version "9.1.8"
   resolved "https://registry.yarnpkg.com/@nestjs/cli/-/cli-9.1.8.tgz#e4cb06c0cb628bf08ae143c2c6278a7beb38044b"
   integrity sha512-53laCMoPLAkjyz3405FlMSrHnbr3DGeoaQjY963bEroezLlm/qfQhwj6oGJwtgA28eNFgx68mvQV2f1VZNUJtw==
